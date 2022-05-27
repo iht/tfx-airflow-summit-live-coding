@@ -45,7 +45,7 @@ def run_pipeline(data_location: str,
 
 PIPELINE_NAME = "01_my_first_tfx_pipeline"
 PIPELINE_ROOT = "/tmp/airflow-summit-live/tfx/"
-DATA_LOCATION = "/Users/ihr/projects/tfx-airflow-summit-live-coding/data/iris_dataset.csv"
+DATA_LOCATION = "/Users/ihr/projects/tfx-airflow-summit-live-coding/data/"
 
 DAG = run_pipeline(data_location=DATA_LOCATION,
                    pipeline_root=PIPELINE_ROOT,
