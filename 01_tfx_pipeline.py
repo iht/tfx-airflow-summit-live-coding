@@ -28,7 +28,7 @@ def create_pipeline(data_location: str,
 
     components = [example_gen, statistics_gen, schema_gen, transform]
 
-    metadata_path = os.path.join(pipeline_root, "tfx_metadata.db")
+    metadata_path = os.path.join("/tmp/airflow-summit-live/tfx/", "tfx_metadata.db")
     metadata_conn = metadata.sqlite_metadata_connection_config(metadata_db_uri=metadata_path)
 
     pipeline = tfx.dsl.Pipeline(pipeline_name=pipeline_name,
