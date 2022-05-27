@@ -10,10 +10,12 @@ from tfx.orchestration.airflow.airflow_dag_runner import AirflowDagRunner
 
 
 def create_pipeline(data_location: str,
+                    query: str,
                     pipeline_name: str,
                     pipeline_root: str,
                     preprocessing_location: str) -> tfx.dsl.Pipeline:
-    example_gen: CsvExampleGen = CsvExampleGen(input_base=data_location)
+    #example_gen: CsvExampleGen = CsvExampleGen(input_base=data_location)
+    example_gen = BigQueryExampleGen(query=query)
 
     statistics_gen = tfx.components.StatisticsGen(examples=example_gen.outputs['examples'])
     schema_gen = tfx.components.SchemaGen(statistics=statistics_gen.outputs['statistics'])
@@ -37,10 +39,12 @@ def create_pipeline(data_location: str,
 
 
 def run_pipeline(data_location: str,
+                 query: str,
                  pipeline_name: str,
                  pipeline_root: str,
                  preprocessing_location: str):
     p: tfx.dsl.Pipeline = create_pipeline(data_location=data_location,
+                                          query=query,
                                           pipeline_name=pipeline_name,
                                           pipeline_root=pipeline_root,
                                           preprocessing_location=preprocessing_location)
@@ -58,7 +62,10 @@ PIPELINE_ROOT = "/tmp/airflow-summit-live/tfx/"
 DATA_LOCATION = "/Users/ihr/projects/tfx-airflow-summit-live-coding/data/"
 PREPROCESSING_LOCATION = "/Users/ihr/projects/tfx-airflow-summit-live-coding/preprocessing_fn.py"
 
+QUERY = "SELECT * FROM `bigquery-public-data.ml_datasets.iris`"
+
 DAG = run_pipeline(data_location=DATA_LOCATION,
+                   query=QUERY,
                    pipeline_root=PIPELINE_ROOT,
                    pipeline_name=PIPELINE_NAME,
                    preprocessing_location=PREPROCESSING_LOCATION)
