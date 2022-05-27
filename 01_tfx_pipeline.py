@@ -43,7 +43,7 @@ def run_pipeline(data_location: str,
     return runner.run(p)
 
 
-PIPELINE_NAME = "my_first_tfx_pipeline"
+PIPELINE_NAME = "01_my_first_tfx_pipeline"
 PIPELINE_ROOT = "/tmp/airflow-summit-live/tfx/"
 DATA_LOCATION = "/Users/ihr/projects/tfx-airflow-summit-live-coding/data/iris_dataset.csv"
 
