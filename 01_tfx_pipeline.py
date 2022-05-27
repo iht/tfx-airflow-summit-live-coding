@@ -14,6 +14,8 @@ def create_pipeline(data_location: str,
                     pipeline_root: str) -> tfx.dsl.Pipeline:
     example_gen: CsvExampleGen = CsvExampleGen(input_base=data_location)
 
+    example_gen.outputs['examples']
+
     components = [example_gen]
 
     metadata_path = os.path.join(pipeline_root, "tfx_metadata.db")
